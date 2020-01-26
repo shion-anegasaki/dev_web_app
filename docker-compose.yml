@@ -1,0 +1,14 @@
+version: "3"
+services:
+  app:
+    restart: always
+    container_name: app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./django_web_app/:/src
+    tty: true
+    ports:
+      - 9000:9000
+    command: python3 /src/manage.py runserver 0.0.0.0:9000
