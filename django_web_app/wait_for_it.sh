@@ -11,7 +11,7 @@ shift
 cmd="$@"
 
 echo "Waiting for mysql"
-until mysql -h"$host" -u"$user" -p"$password" &> /dev/null
+until mysqladmin ping -h "$host" -u "$user" -p"$password" --silent &> /dev/null;
 do
     echo -n "."
     sleep 1
