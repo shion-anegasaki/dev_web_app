@@ -1,34 +1,56 @@
 {% extends "./base.html" %}
 
 {% block body %}
-<div class="container-fluid">
-  <main class="col-xs-12"><br/>
-    <form action="/todo/regist/" method="POST">
-      {% csrf_token %}
-      {{ form }}
-      <button type="submit" class="btn btn-primary">登録</button>
-    </form>
+<div class="container">
+  <main>
+    <div class="col-xs-12 mt-5 mb-5">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Todoフォーム</h5>
+          <form action="/todo/regist/" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              {{ form.text.label_tag }}
+              {{ form.text }}
+            </div>
+            <div class="form-group">
+              {{ form.is_done.label_tag }}
+              {{ form.is_done }}
+            </div>
 
-    <table class="table table-borderd">
-      <tr>
-        <th>#</th>
-        <th>やること</th>
-        <th>完了ステータス</th>
-      </tr>
-      {% for todo in items %}
-      <tr>
-        <td>{{ todo.id }}</td>
-        <td>{{ todo.text }}</td>
-        <td>
-          {% if todo.is_done %}
-          <span class="badge badge-success">完了</span>
-          {% else %}
-          <span class="badge badge-danger">未完</span>
-          {% endif %}
-        </td>
-      </tr>
-      {% endfor %}
-    </table>
+            <button type="submit" class="btn btn-primary">登録</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 mb-5">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Todoリスト</h5>
+          <table class="table table-borderd">
+            <tr>
+              <th>#</th>
+              <th>やること</th>
+              <th>完了ステータス</th>
+            </tr>
+            {% for todo in items %}
+            <tr>
+              <td>{{ todo.id }}</td>
+              <td>{{ todo.text }}</td>
+              <td>
+                {% if todo.is_done %}
+                <span class="badge badge-success">完了</span>
+                {% else %}
+                <span class="badge badge-danger">未完</span>
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div>
   </main>
 </div>
 {% endblock %}
