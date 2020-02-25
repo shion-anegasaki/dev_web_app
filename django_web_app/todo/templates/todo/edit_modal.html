@@ -1,0 +1,35 @@
+<form action="/todo/edit/" method="POST">
+  <div class="modal fade" tabindex="-1" role="dialog" id="editModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">やること</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>登録内容の編集</p>
+          {% csrf_token %}
+          <input type="hidden" value="" id="edit_id" name="todo_id">
+          <div class="form-group">
+            {{ form.text.label_tag }}
+            <input type="text" name="{{ form.text.name }}" id="edit_text" class="form-control">
+          </div>
+          <div class="form-group">
+            {{ form.is_done.label_tag }}
+            <select name="{{ form.is_done.name }}" id="edit_status" class="form-control">
+              {% for value, text in form.is_done.field.choices %}
+                <option value="{% if value %}1{% else %}0{% endif %}">{{ text }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+          <button type="submit" class="btn btn-primary">変更を保存</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
