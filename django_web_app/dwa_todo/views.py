@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http.response import JsonResponse
 from django.middleware.csrf import get_token
-from todo.models import Todo
-from todo.forms import TodoForm
+from dwa_common.models import Todo
+from dwa_todo.forms import TodoForm
 
 
 def index(request):
